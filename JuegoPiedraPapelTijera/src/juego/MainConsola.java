@@ -31,7 +31,7 @@ public class MainConsola {
         MainConsola consola = new MainConsola();
         int valoropcion = 0;
         char primeraLetra;
-
+        Juego juego = new Juego();
         System.out.print("\n ******** COMENZAR JUEGO ********  ");
         do {
             inputScanner = new Scanner(System.in);
@@ -61,7 +61,6 @@ public class MainConsola {
             }
 
             if (valoropcion != -1) {
-                Juego juego = new Juego();
                 juego.comenzarJuego(valoropcion);
                 if (!consola.playAgain(inputScanner)) {
                     juego.estadisticaDelJuego();

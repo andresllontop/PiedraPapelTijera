@@ -37,7 +37,6 @@ public class ImpComputadora implements InterfaceComputadora {
             case 2:
                 return mover.crearRoca(this.getNombre()).getIndice();
             default:
-                System.out.print("\n OPCIÓN INCORRECTA");
                 return getMover(mover, valor);
         }
 
@@ -60,6 +59,6 @@ public class ImpComputadora implements InterfaceComputadora {
 
     @Override
     public void setPuntaje(int puntaje) {
-        this.puntaje = (this.puntaje + puntaje);
+        this.puntaje = this.puntaje + puntaje;
     }
 }
