@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package abstracts;
+package interfaces;
 
 /**
  *
  * @author andres
  */
-public abstract class AbstractRoca extends AbstractJuego{
-    
+public interface InterfaceJuego {
+
+    public String getNombre();
+
+    public int getIndice();
+
 }

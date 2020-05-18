@@ -3,30 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package abstracts;
+package implementar;
+
+import interfaces.InterfacePapel;
 
 /**
  *
  * @author andres
  */
-public class Roca extends AbstractRoca {
+public class Papel implements InterfacePapel {
 
-    public Roca() {
-        System.out.print("\n seleccionaste => ROCA");
+    public Papel() {
+        System.out.print("\n seleccionaste => PAPEL");
     }
 
-    public Roca(String Nombre) {
-        System.out.print("\n " + Nombre + " seleccionaste => ROCA");
+    public Papel(String Nombre) {
+        System.out.print("\n " + Nombre + " seleccionaste => PAPEL");
     }
 
     @Override
     public String getNombre() {
-        return "ROCA";
+        return "PAPEL";
     }
 
     @Override
     public int getIndice() {
-        return 2;
+        return 0;
     }
 
 }

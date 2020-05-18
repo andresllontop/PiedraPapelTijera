@@ -3,30 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package abstracts;
+package implementar;
+
+import interfaces.InterfaceRoca;
 
 /**
  *
  * @author andres
  */
-public class Tijera extends AbstractTijera {
+public class Roca implements InterfaceRoca {
 
-    public Tijera() {
-        System.out.print("\n seleccionaste => TIJERA");
+    public Roca() {
+        System.out.print("\n seleccionaste => ROCA");
     }
 
-    public Tijera(String Nombre) {
-        System.out.print("\n " + Nombre + " seleccionaste => TIJERA");
+    public Roca(String Nombre) {
+        System.out.print("\n " + Nombre + " seleccionaste => ROCA");
     }
 
     @Override
     public String getNombre() {
-        return "TIJERA";
+        return "ROCA";
     }
 
     @Override
     public int getIndice() {
-        return 1;
+        return 2;
     }
 
 }

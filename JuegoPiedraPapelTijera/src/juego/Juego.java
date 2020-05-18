@@ -22,7 +22,6 @@ public class Juego {
 
     private final InterfaceComputadora computadora;
     private final InterfaceUsuario usuario;
-
     private int cantidadDeJugadas;
 
     public Juego() {
@@ -34,31 +33,45 @@ public class Juego {
 
     }
 
-    public void comenzarJuego(int valoropcion) {
+    public Object[] comenzarJuego(int valoropcion) {
+        int usuarioValor = usuario.getMover(new Mover(), valoropcion);
+        int computadoraValor = computadora.getMover(new Mover(), 3);
+        Object[] resultado = new Object[6];
+        resultado[0] = usuarioValor;
+        resultado[1] = computadoraValor;
 
-        int comparaMovimiento = this.compararMovimiento(usuario.getMover(new Mover(), valoropcion),
-                computadora.getMover(new Mover(), 3));
+        int comparaMovimiento = this.compararMovimiento(usuarioValor,
+                computadoraValor);
+
         switch (comparaMovimiento) {
             case 0://EMPATE
                 System.out.print("\n********  !EMPATE! ********  ");
+                resultado[2] = "EMPATE";
                 break;
             case 1://GANA USUARIO
                 System.out.print("\n" + usuario.getNombre() + " LE GANA A " + computadora.getNombre() + "\n ********  !GANASTE! ******** ");
+                resultado[2] = "GANA";
                 usuario.setPuntaje(1);
                 break;
             case -1://GANA COMPUTADORA
                 System.out.print("\n" + computadora.getNombre() + " LE GANA A " + usuario.getNombre() + "\n ********  !PERDISTE! ******** ");
+                resultado[2] = "PIERDE";
                 computadora.setPuntaje(1);
                 break;
         }
         this.cantidadDeJugadas++;
 
+        resultado[3] = usuario.getPuntaje();
+        resultado[4] = computadora.getPuntaje();
+        resultado[5] = cantidadDeJugadas;
+        return resultado;
+
     }
 
     public void estadisticaDelJuego() {
-         System.out.print("\n ********  ESTADISTICAS ******** ");
-        System.out.print("\n PUNTAJE "+usuario.getNombre()+" : " + usuario.getPuntaje());
-        System.out.print("\n PUNTAJE "+computadora.getNombre()+" : " + computadora.getPuntaje());
+        System.out.print("\n ********  ESTADISTICAS ******** ");
+        System.out.print("\n PUNTAJE " + usuario.getNombre() + " : " + usuario.getPuntaje());
+        System.out.print("\n PUNTAJE " + computadora.getNombre() + " : " + computadora.getPuntaje());
         System.out.print("\n PUNTAJE EMPATES : " + (this.cantidadDeJugadas - (usuario.getPuntaje() + computadora.getPuntaje())));
         System.out.print("\n NÚMERO DE JUGADAS : " + this.cantidadDeJugadas);
     }

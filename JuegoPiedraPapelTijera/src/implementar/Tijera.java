@@ -3,30 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package abstracts;
+package implementar;
+
+import interfaces.InterfaceTijera;
 
 /**
  *
  * @author andres
  */
-public class Papel extends AbstractPapel {
+public class Tijera implements InterfaceTijera {
 
-    public Papel() {
-        System.out.print("\n seleccionaste => PAPEL");
+    public Tijera() {
+        System.out.print("\n seleccionaste => TIJERA");
     }
 
-    public Papel(String Nombre) {
-        System.out.print("\n " + Nombre + " seleccionaste => PAPEL");
+    public Tijera(String Nombre) {
+        System.out.print("\n " + Nombre + " seleccionaste => TIJERA");
     }
 
     @Override
     public String getNombre() {
-        return "PAPEL";
+        return "TIJERA";
     }
 
     @Override
     public int getIndice() {
-        return 0;
+        return 1;
     }
 
 }

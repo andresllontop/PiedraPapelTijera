@@ -9,12 +9,6 @@ package interfaces;
  *
  * @author andres
  */
-public interface InterfaceMover {
-
-    public InterfaceTijera crearTijera(String Nombre);
-
-    public InterfacePapel crearPapel(String Nombre);
-
-    public InterfaceRoca crearRoca(String Nombre);
-
+public interface InterfacePapel extends InterfaceJuego{
+    
 }
