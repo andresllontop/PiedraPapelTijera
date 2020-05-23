@@ -9,11 +9,15 @@ package SIMPLE;
  *
  * @author andres
  */
-        //CLASE HIJO
+//CLASE HIJO
 public class Mover extends Jugador {
-
     private String tipo;
     private int indice;
+    //TIPO=INDICE;
+    //PAPEL=0;
+    //TIJERA=1;
+    //ROCA=2;
+
     //CONSTRUCTOR QUE INGRESA EL JUGADOR, PUNTAJE Y TIPO DE MOVIMIENTO(NOMBRE)
     public Mover(String jugador, int puntaje, String tipo) {
         // INGRESAMOS NOMBRE Y PUNTAJE AL CONSTRUCTOR PADRE(JUGADOR)
@@ -22,16 +26,19 @@ public class Mover extends Jugador {
         this.tipo = tipo;
 
     }
+
     //CONSTRUCTOR QUE INGRESA EL JUGADOR, TIPO DE MOVIMIENTO(NOMBRE Y NUMERO)
     public Mover(String jugador, String tipo, int indice) {
         super(jugador);
         this.tipo = tipo;
         this.indice = indice;
     }
+
     //CONSTRUCTOR CON EL NOMBRE DEL JUGADOR
     public Mover(String jugador) {
         super(jugador);
     }
+
     //CONSTRUCTOR CON EL NOMBRE Y PUNTAJE DEL JUGADOR
     public Mover(String jugador, int puntaje) {
         super(jugador, puntaje);
