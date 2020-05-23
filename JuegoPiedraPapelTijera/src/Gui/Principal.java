@@ -10,31 +10,37 @@ import SIMPLE.Juego;
  */
 public final class Principal extends javax.swing.JFrame {
 
+    //creamos variables del tipo de Clase   
     Juego juego;
     Jugador jugador;
     Jugador computer;
 
     public Principal() {
+        //instanciamos las variables  
         juego = new Juego();
+        //al constructor le enviamos de parametros nombre del USUARIO y 
+        //a la cantidad de puntaje lo inicializamos en cero.
         jugador = new Mover("JUGADOR", 0);
-        computer = new Mover("COMPUTADORA", 0);
-
+        computer = new Mover("COMPUTER", 0);
+        
+        //DISEÑO DE LA INTERFAZ
         initComponents();
         setResizable(false);
         setSize(1280, 720);
         this.setLocationRelativeTo(null);
-        score.setText("0");
-        score2.setText("0");
 
+        //mostramos el puntaje inicial
+        score.setText(jugador.getPuntaje() + "");
+        score2.setText(computer.getPuntaje() + "");
+        //mostramos el nombre de jugadores
+        NombreUsuario.setText(jugador.getJugador());
+        NombreComputer.setText(computer.getJugador());
+        //INICIALIZAMOS VALORES
         InicializarValores();
-
-        labelUsuario.setVisible(false);
-        labelComputer.setVisible(false);
-
     }
 
     public void InicializarValores() {
-        //VISIBLE BOTONES COMPUTADORA
+        // BOTONES ACTIVOS DE LA COMPUTADORA
         rocaComputer.setEnabled(true);
         papelComputer.setEnabled(true);
         tijeraComputer.setEnabled(true);
@@ -51,21 +57,26 @@ public final class Principal extends javax.swing.JFrame {
 
     }
 
-    public void game() {
+    public void game(String jugada) {
+        //INICIALIZAMOS VALORES
+        InicializarValores();
+        //GENERAMOS JUGADA ALEATORIA DE LA COMPUTADORA
         computer = juego.aleatorio(computer);
-        jugador.SetNombre(labelUsuario.getText());
+        //INGRESAMOS LA JUGADA SELECCIONADA DEL USUARIO 
+        jugador.SetTipo(jugada);
+        //CAPTURAMOS RESULTADOS
         Jugador[] array = juego.comenzarJuego(jugador, computer);
         //USUARIO
         switch (array[0].getIndice()) {
-            //PAPEL
+            //VISIBLIDAD DEL BOTÓN PAPEL
             case 0:
                 papelJugadaUsuario.setVisible(true);
                 break;
-            //TIJERA
+            //VISIBLIDAD DEL BOTÓN TIJERA
             case 1:
                 tijeraJugadaUsuario.setVisible(true);
                 break;
-            //ROCA
+            //VISIBLIDAD DEL BOTÓN ROCA
             case 2:
                 rocaJugadaUsuario.setVisible(true);
                 break;
@@ -73,40 +84,40 @@ public final class Principal extends javax.swing.JFrame {
 
         //COMPUTER
         switch (array[1].getIndice()) {
-            //PAPEL
+            //VISIBLIDAD DEL BOTÓN PAPEL
             case 0:
                 papelComputer.setEnabled(false);
                 papelJugadaComputer.setVisible(true);
                 break;
-            //TIJERA
+            //VISIBLIDAD DEL BOTÓN TIJERA
             case 1:
                 tijeraComputer.setEnabled(false);
                 tijeraJugadaComputer.setVisible(true);
                 break;
-            //ROCA
+            //VISIBLIDAD DEL BOTÓN ROCA
             case 2:
                 rocaComputer.setEnabled(false);
                 rocaJugadaComputer.setVisible(true);
                 break;
         }
         //MOSTRAR GANADOR
-        array[0].getEstado();
-        array[1].getEstado();
         if (array[0].getEstado().equals("GANA")) {
-            NOTE.setText("PLAYER WIN!");
+            NOTE.setText(jugador.getJugador() + " WIN!");
         } else if (array[1].getEstado().equals("GANA")) {
-            NOTE.setText("COMPUTER WIN!");
+            NOTE.setText(computer.getJugador() + " WIN!");
         } else {
             NOTE.setText("EMPATE!");
-        }
-        if (rootPaneCheckingEnabled) {
-
-        } else {
         }
         //PUNTAJE USUARIO
         score.setText(array[0].getPuntaje() + "");
         //PUNTAJE COMPUTADORA
         score2.setText(array[1].getPuntaje() + "");
+        //N° EMPATES
+        ScoreEmpate.setText((juego.getCantidadDeJugadas()
+                - array[0].getPuntaje()
+                - array[1].getPuntaje()) + "");
+        //N° JUGADAS
+        ScoreJugada.setText(juego.getCantidadDeJugadas() + "");
 
     }
 
@@ -131,10 +142,8 @@ public final class Principal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        labelComputer = new javax.swing.JLabel();
-        labelUsuario = new javax.swing.JLabel();
+        NombreComputer = new javax.swing.JLabel();
+        NombreUsuario = new javax.swing.JLabel();
         score = new javax.swing.JLabel();
         score2 = new javax.swing.JLabel();
         NOTE = new javax.swing.JLabel();
@@ -144,6 +153,10 @@ public final class Principal extends javax.swing.JFrame {
         rocaJugadaComputer = new javax.swing.JButton();
         papelJugadaComputer = new javax.swing.JButton();
         tijeraJugadaComputer = new javax.swing.JButton();
+        labelEmpate = new javax.swing.JLabel();
+        ScoreEmpate = new javax.swing.JLabel();
+        ScoreJugada = new javax.swing.JLabel();
+        labelJugada = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -227,7 +240,7 @@ public final class Principal extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 150, 440));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 10, 440));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 280, 460, 20));
@@ -236,33 +249,28 @@ public final class Principal extends javax.swing.JFrame {
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 280, 20, 440));
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Computer");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, -1, -1));
+        NombreComputer.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
+        NombreComputer.setForeground(new java.awt.Color(255, 255, 255));
+        NombreComputer.setText("Computer");
+        jPanel1.add(NombreComputer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Player ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        labelComputer.setText("jLabel4");
-        jPanel1.add(labelComputer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 140, -1, -1));
-
-        labelUsuario.setText("jLabel4");
-        jPanel1.add(labelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
+        NombreUsuario.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
+        NombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        NombreUsuario.setText("Player ");
+        jPanel1.add(NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         score.setFont(new java.awt.Font("Gill Sans Ultra Bold Condensed", 0, 36)); // NOI18N
         score.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(score, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 5, -1, -1));
+        jPanel1.add(score, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, 30));
 
         score2.setFont(new java.awt.Font("Gill Sans Ultra Bold Condensed", 0, 36)); // NOI18N
         score2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(score2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 5, -1, -1));
+        jPanel1.add(score2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, 60, 30));
 
         NOTE.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 48)); // NOI18N
         NOTE.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(NOTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 310, 60));
+        NOTE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(NOTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 660, 60));
 
         rocaJugadaUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rock (1).png"))); // NOI18N
         rocaJugadaUsuario.setBorderPainted(false);
@@ -324,6 +332,24 @@ public final class Principal extends javax.swing.JFrame {
         });
         jPanel1.add(tijeraJugadaComputer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 140, -1));
 
+        labelEmpate.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
+        labelEmpate.setForeground(new java.awt.Color(255, 255, 255));
+        labelEmpate.setText("Empate  :");
+        jPanel1.add(labelEmpate, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 110, 30));
+
+        ScoreEmpate.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
+        ScoreEmpate.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(ScoreEmpate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 530, 70, 30));
+
+        ScoreJugada.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
+        ScoreJugada.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(ScoreJugada, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 570, 70, 30));
+
+        labelJugada.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
+        labelJugada.setForeground(new java.awt.Color(255, 255, 255));
+        labelJugada.setText("N° de Jugadas  :");
+        jPanel1.add(labelJugada, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, 180, 30));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fondo.png"))); // NOI18N
         jLabel4.setText("jLabel4");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, -6, 1280, 730));
@@ -332,13 +358,11 @@ public final class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1271, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, Short.MAX_VALUE)
         );
 
         pack();
@@ -346,24 +370,18 @@ public final class Principal extends javax.swing.JFrame {
 
     private void rocaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rocaUsuarioActionPerformed
         // TODO add your handling code here:
-        labelUsuario.setText("ROCA");
-        InicializarValores();
-        game();
+        game("ROCA");
 
     }//GEN-LAST:event_rocaUsuarioActionPerformed
 
     private void papelUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_papelUsuarioActionPerformed
         // TODO add your handling code here:
-        labelUsuario.setText("PAPEL");
-        InicializarValores();
-        game();
+        game("PAPEL");
     }//GEN-LAST:event_papelUsuarioActionPerformed
 
     private void tijeraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tijeraUsuarioActionPerformed
         // TODO add your handling code here:
-        labelUsuario.setText("TIJERA");
-        InicializarValores();
-        game();
+        game("TIJERA");
     }//GEN-LAST:event_tijeraUsuarioActionPerformed
 
     private void rocaComputerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rocaComputerActionPerformed
@@ -450,17 +468,19 @@ public final class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel NOTE;
+    private javax.swing.JLabel NombreComputer;
+    private javax.swing.JLabel NombreUsuario;
+    private javax.swing.JLabel ScoreEmpate;
+    private javax.swing.JLabel ScoreJugada;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JLabel labelComputer;
-    private javax.swing.JLabel labelUsuario;
+    private javax.swing.JLabel labelEmpate;
+    private javax.swing.JLabel labelJugada;
     private javax.swing.JButton papelComputer;
     private javax.swing.JButton papelJugadaComputer;
     private javax.swing.JButton papelJugadaUsuario;

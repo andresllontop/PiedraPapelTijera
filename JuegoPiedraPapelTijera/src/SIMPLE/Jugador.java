@@ -9,12 +9,13 @@ package SIMPLE;
  *
  * @author andres
  */
+//CLASE ABSTRACTA PADRE
 public abstract class Jugador {
-
     private String jugador;
     private int puntaje;
+    //ESTADO=GANA,PIERDE,EMPATA
     private String estado;
-
+    //CONSTRUCTOR
     public Jugador(String jugador) {
         System.out.println(" PLAYER : " + jugador);
         this.jugador = jugador;
@@ -50,13 +51,12 @@ public abstract class Jugador {
         this.estado = estado;
     }
     
-    //propiedades abstractas
-
-    public abstract String getNombre();
+    //propiedades abstractas DONDE LAS CLASES HIJAS INGRESARAN EL CUERPO
+    public abstract String getTipo();
 
     public abstract int getIndice();
 
-    public abstract void SetNombre(String nombre);
+    public abstract void SetTipo(String nombre);
 
     public abstract void SetIndice(int indice);
 }

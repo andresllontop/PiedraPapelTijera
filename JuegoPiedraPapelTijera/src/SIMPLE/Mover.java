@@ -9,39 +9,42 @@ package SIMPLE;
  *
  * @author andres
  */
+        //CLASE HIJO
 public class Mover extends Jugador {
 
-    private String nombre;
+    private String tipo;
     private int indice;
-
-    public Mover(String jugador, int puntaje, String nombre) {
+    //CONSTRUCTOR QUE INGRESA EL JUGADOR, PUNTAJE Y TIPO DE MOVIMIENTO(NOMBRE)
+    public Mover(String jugador, int puntaje, String tipo) {
+        // INGRESAMOS NOMBRE Y PUNTAJE AL CONSTRUCTOR PADRE(JUGADOR)
         super(jugador, puntaje);
-        this.nombre = nombre;
+        //INGRESAMOS TPO DE MOVIMIENTO: PIEDRA,PAPEL,TIJERA
+        this.tipo = tipo;
 
     }
-
-    public Mover(String jugador, String nombre, int indice) {
+    //CONSTRUCTOR QUE INGRESA EL JUGADOR, TIPO DE MOVIMIENTO(NOMBRE Y NUMERO)
+    public Mover(String jugador, String tipo, int indice) {
         super(jugador);
-        this.nombre = nombre;
+        this.tipo = tipo;
         this.indice = indice;
     }
-
+    //CONSTRUCTOR CON EL NOMBRE DEL JUGADOR
     public Mover(String jugador) {
         super(jugador);
     }
-
+    //CONSTRUCTOR CON EL NOMBRE Y PUNTAJE DEL JUGADOR
     public Mover(String jugador, int puntaje) {
         super(jugador, puntaje);
     }
 
     @Override
-    public String getNombre() {
-        return this.nombre;
+    public String getTipo() {
+        return this.tipo;
     }
 
     @Override
-    public void SetNombre(String nombre) {
-        switch (nombre) {
+    public void SetTipo(String tipo) {
+        switch (tipo) {
             case "PAPEL":
                 this.indice = 0;
                 break;
@@ -52,12 +55,12 @@ public class Mover extends Jugador {
                 this.indice = 2;
                 break;
         }
-        this.nombre = nombre;
+        this.tipo = tipo;
     }
 
     @Override
     public int getIndice() {
-        System.out.println(this.getJugador() + " ---> seleccionaste: " + this.nombre + " ");
+        System.out.println(this.getJugador() + " ---> seleccionaste: " + this.tipo + " ");
         return this.indice;
     }
 
@@ -65,13 +68,13 @@ public class Mover extends Jugador {
     public void SetIndice(int indice) {
         switch (indice) {
             case 0:
-                this.nombre = "PAPEL";
+                this.tipo = "PAPEL";
                 break;
             case 1:
-                this.nombre = "TIJERA";
+                this.tipo = "TIJERA";
                 break;
             case 2:
-                this.nombre = "ROCA";
+                this.tipo = "ROCA";
                 break;
         }
         this.indice = indice;
